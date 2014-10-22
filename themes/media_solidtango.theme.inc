@@ -13,7 +13,7 @@ function media_solidtango_preprocess_media_solidtango_video(&$variables) {
   // Build the URI.
   $wrapper = file_stream_wrapper_get_instance_by_uri($variables['uri']);
   $parts = $wrapper->get_parameters();
-  $variables['video_id'] = $parts['video'];
+  $variables['video_id'] = $parts['slug'];
   $variables['host'] = $parts['host'];
 
   // Make the file object available.

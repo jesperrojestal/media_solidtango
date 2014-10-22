@@ -14,15 +14,16 @@ class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
   public function parse($embedCode) {
     // http://solidtango.com/video/*
     $patterns = array(
-      '@([a-z0-9\-]+\.ststage\.se)/video/(.+)@i'
+      '@([a-z0-9\-]+\.solidtango\.com)/(video)/(.+)@i',
+      '@([a-z0-9\-]+\.solidtango\.com)/(live)/(.+)@i'
     );
 
     foreach ($patterns as $pattern) {
       preg_match($pattern, $embedCode, $matches);
       // @TODO: Parse is called often. Refactor so that valid ID is checked
       // when a video is added, but not every time the embedCode is parsed.
-      if (isset($matches[1]) && isset($matches[2]) && self::validId($matches[1], $matches[2])) {
-        return file_stream_wrapper_uri_normalize('solidtango://host/' . $matches[1]. '/video/' . $matches[2]);
+      if (isset($matches[1]) && isset($matches[2]) && isset($matches[3]) && self::validId($matches[1], $matches[2], isset($matches[3]))) {
+        return file_stream_wrapper_uri_normalize('solidtango://host/' . $matches[1] . '/type/' . $matches[2] . '/slug/' . $matches[3]);
       }
     }
   }
@@ -58,7 +59,7 @@ class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
   public function getOEmbed() {
     $uri = $this->parse($this->embedCode);
     $external_url = file_create_url($uri);
-    $oembed_url = url('http://ststage.se/api/v1/oembed_video.json', array('query' => array('url' => $external_url)));
+    $oembed_url = url('http://solidtango.com/api/v1/oembed_video.json', array('query' => array('url' => $external_url)));
     $response = drupal_http_request($oembed_url);
 
     if (!isset($response->error)) {
@@ -77,10 +78,10 @@ class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
    *   TRUE if the video ID is valid, or throws a
    *   MediaInternetValidationException otherwise.
    */
-  static public function validId($host,$id) {
-    $uri = file_stream_wrapper_uri_normalize('solidtango://host/' . check_plain($host) . '/video/' . check_plain($id));
+  static public function validId($host, $type, $id) {
+    $uri = file_stream_wrapper_uri_normalize('solidtango://host/' . check_plain($host) . '/type/' . check_plain($type) . '/slug/' . check_plain($id));
     $external_url = file_create_url($uri);
-    $oembed_url = url('http://ststage.se/api/v1/oembed_video.json', array('query' => array('url' => $external_url)));
+    $oembed_url = url('http://solidtango.com/api/v1/oembed_video.json', array('query' => array('url' => $external_url)));
     $response = drupal_http_request($oembed_url, array('method' => 'HEAD'));
 
     if ($response->code == 401) {

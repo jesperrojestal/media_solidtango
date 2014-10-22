@@ -18,16 +18,16 @@ class MediaSolidtangoStreamWrapper extends MediaReadOnlyStreamWrapper {
 
   function interpolateUrl() {
     if ($parameters = $this->get_parameters()) {
-      //return $this->base_url . '/' . $parameters['video'];
-      return $this->base_url . $parameters['host'] . '/video/' . $parameters['video'];
+      return $this->base_url . $parameters['host'] . '/' . $parameters['type'] . '/' . $parameters['slug'];
     }
   }
 
   function getOriginalThumbnailPath() {
     $parts = $this->get_parameters();
-    $uri = file_stream_wrapper_uri_normalize('solidtango://host/' . check_plain($parts['host']) . '/video/' . check_plain($parts['video']));
+    $uri = file_stream_wrapper_uri_normalize('solidtango://host/' . check_plain($parts['host']) . '/type/' . check_plain($parts['type']) . '/slug/' . check_plain($parts['slug']));
+    throw new Exception("I AM ERROR: " . $uri);
     $external_url = file_create_url($uri);
-    $oembed_url = url('http://ststage.se/api/v1/oembed_video.json', array('query' => array('url' => $external_url)));
+    $oembed_url = url('http://solidtango.com/api/v1/oembed_video.json', array('query' => array('url' => $external_url)));
     $response = drupal_http_request($oembed_url);
 
     if (!isset($response->error)) {
@@ -44,7 +44,7 @@ class MediaSolidtangoStreamWrapper extends MediaReadOnlyStreamWrapper {
     $parts = $this->get_parameters();
     // There's no need to hide thumbnails, always use the public system rather
     // than file_default_scheme().
-    $local_path = 'public://media-solidtango/' . check_plain($parts['video']) . '.jpg';
+    $local_path = 'public://media-solidtango/' . check_plain($parts['slug']) . '.jpg';
 
     if (!file_exists($local_path)) {
       $dirname = drupal_dirname($local_path);

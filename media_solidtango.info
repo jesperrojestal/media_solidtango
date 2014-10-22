@@ -8,9 +8,9 @@ dependencies[] = media_internet
 files[] = includes/MediaSolidtangoStreamWrapper.inc
 files[] = includes/MediaInternetSolidtangoHandler.inc
 
-; Information added by Drupal.org packaging script on 2014-03-26
+; Information added manualy on 2014-09-03
 version = "7.x-2.1"
 core = "7.x"
 project = "media_solidtango"
-datestamp = "1395824044"
+datestamp = "1409744368"
 
