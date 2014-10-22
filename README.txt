@@ -11,7 +11,7 @@ INTRODUCTION
 
 Current Maintainers:
 
-  * Jesper Röjestål
+  * Solidtango
 
 Media: Solidtango adds Solidtango as a supported media provider.
 
