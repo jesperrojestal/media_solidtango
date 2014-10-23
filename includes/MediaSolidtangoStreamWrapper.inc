@@ -25,7 +25,6 @@ class MediaSolidtangoStreamWrapper extends MediaReadOnlyStreamWrapper {
   function getOriginalThumbnailPath() {
     $parts = $this->get_parameters();
     $uri = file_stream_wrapper_uri_normalize('solidtango://host/' . check_plain($parts['host']) . '/type/' . check_plain($parts['type']) . '/slug/' . check_plain($parts['slug']));
-    throw new Exception("I AM ERROR: " . $uri);
     $external_url = file_create_url($uri);
     $oembed_url = url('http://solidtango.com/api/v1/oembed_video.json', array('query' => array('url' => $external_url)));
     $response = drupal_http_request($oembed_url);
