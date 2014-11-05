@@ -23,27 +23,7 @@ function media_solidtango_preprocess_media_solidtango_video(&$variables) {
   // Parse options and build the query string. Only add the option to the query
   // array if the option value is not default. Be careful, depending on the
   // wording in media_solidtango.formatters.inc, TRUE may be query=0.
-  // @see http://developer.solidtango.com/player/embedding
   $query = array();
-
-  // These queries default to 0. If the option is true, set value to 1.
-  //foreach (array('api', 'autoplay', 'loop') as $option) {
-  //  if ($variables['options'][$option]) {
-  //    $query[$option] = 1;
-  //  }
-  //}
-
-  // These queries default to 1. If the option is false, set value to 0.
-  //foreach (array('portrait', 'title', 'byline') as $option) {
-  //  if (!$variables['options'][$option]) {
-  //    $query[$option] = 0;
-  //  }
-  //}
-
-  // Strings.
-  //if (isset($variables['options']['color'])) {
-  //  $query['color'] = str_replace('#', '', $variables['options']['color']);
-  //}
 
   // Non-query options.
   if ($variables['options']['protocol_specify']) {

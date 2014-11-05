@@ -3,6 +3,7 @@
 /**
  * @file
  * File formatters for Solidtango videos.
+ * TODO: cleanup of non-working stuff.
  */
 
 /**
@@ -15,7 +16,7 @@ function media_solidtango_file_formatter_info() {
     'default settings' => array(
       'width' => 640,
       'height' => 360,
-      'preview_uri' => 'solidtango://video/bbwqia5s',
+      'preview_uri' => 'solidtango://host/example.solidtango.com/type/video/slug/xyz1a23b',
       'api' => 0,
       'autoplay' => 0,
       'byline' => 1,
