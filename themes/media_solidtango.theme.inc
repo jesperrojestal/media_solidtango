@@ -19,7 +19,6 @@ function media_solidtango_preprocess_media_solidtango_video(&$variables) {
   // Make the file object available.
   $file_object = file_uri_to_object($variables['uri']);
 
-
   // Parse options and build the query string. Only add the option to the query
   // array if the option value is not default. Be careful, depending on the
   // wording in media_solidtango.formatters.inc, TRUE may be query=0.
