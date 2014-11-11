@@ -7,4 +7,3 @@ dependencies[] = media_internet
 
 files[] = includes/MediaSolidtangoStreamWrapper.inc
 files[] = includes/MediaInternetSolidtangoHandler.inc
-

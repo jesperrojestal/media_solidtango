@@ -1,13 +1,17 @@
 <?php
 
 /**
- *  @file
- *  Extends the MediaReadOnlyStreamWrapper class to handle Solidtango videos.
+ * @file
+ * Extends the MediaReadOnlyStreamWrapper class to handle Solidtango videos.
  */
 
 /**
- *  Create an instance like this:
- *  $solidtango = new MediaSolidtangoStreamWrapper('solidtango://video/[video-code]');
+ * Implementation of MediaReadOnlyStreamWrapper.
+ *
+ * Create an instance like this:
+ * $solidtango = new MediaSolidtangoStreamWrapper(
+ *   'solidtango://host/[hostname]/type/[video or live]/slug/[video-slug]'
+ * );
  */
 class MediaSolidtangoStreamWrapper extends MediaReadOnlyStreamWrapper {
   protected $base_url = 'http://';

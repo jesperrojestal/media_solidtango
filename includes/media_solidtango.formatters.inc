@@ -103,7 +103,7 @@ function media_solidtango_file_formatter_video_settings($form, &$form_state, $se
     '#title' => t('Specify an http protocol'),
     '#type' => 'checkbox',
     '#default_value' => $settings['protocol_specify'],
-    '#description' => t('An explicit protocol may be neccesary for videos embedded in RSS feeds and emails. If no protocol is specified, iframes will be protocol relative.'),
+    '#description' => t('An explicit protocol may be necessary for videos embedded in RSS feeds and emails. If no protocol is specified, iframes will be protocol relative.'),
   );
   $element['protocol'] = array(
     '#title' => t('Iframe protocol'),
@@ -121,7 +121,7 @@ function media_solidtango_file_formatter_video_settings($form, &$form_state, $se
   );
 
   // Single options.
-  // Note: make sure the positive/negitive language lines up with option
+  // Note: make sure the positive/negative language lines up with option
   // processing in media_solidtango.theme.inc.
   $element['autoplay'] = array(
     '#title' => t('Autoplay video on load'),
