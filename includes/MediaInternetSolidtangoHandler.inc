@@ -12,7 +12,7 @@
  */
 class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
   public function parse($embedCode) {
-    // http://solidtango.com/video/*
+    // http://example.solidtango.com/video/x1y2z3a4
     $patterns = array(
       '@([a-z0-9\-]+\.solidtango\.com)/(video)/(.+)@i',
       '@([a-z0-9\-]+\.solidtango\.com)/(live)/(.+)@i'
