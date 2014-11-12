@@ -1,8 +1,7 @@
 <?php
 
 /**
- * @file media_solidtango/themes/media-solidtango-video.tpl.php
- *
+ * @file
  * Template file for theme('media_solidtango_video').
  *
  * Variables available:
