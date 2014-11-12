@@ -47,7 +47,7 @@ class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
    * Override inherited getFileObject.
    */
   public function getFileObject() {
-    $uri = $this->parse($this->embed_code);
+    $uri = $this->parse($this->embedCode);
     $file = file_uri_to_object($uri, TRUE);
 
     // Try to default the file name to the video's title.
@@ -69,7 +69,7 @@ class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
    *   Otherwise, NULL.
    */
   public function getOEmbed() {
-    $uri = $this->parse($this->embed_code);
+    $uri = $this->parse($this->embedCode);
     $external_url = file_create_url($uri);
     $oembed_url = url('http://solidtango.com/api/v1/oembed_video.json', array('query' => array('url' => $external_url)));
     $response = drupal_http_request($oembed_url);
