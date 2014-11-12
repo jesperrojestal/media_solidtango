@@ -17,14 +17,14 @@ class MediaSolidtangoStreamWrapper extends MediaReadOnlyStreamWrapper {
   protected $base_url = 'http://';
 
   /**
-   * Override inherited getMimeType function
+   * Override inherited getMimeType.
    */
   public static function getMimeType($uri, $mapping = NULL) {
     return 'video/solidtango';
   }
 
   /**
-   * Override inherited interpolateUrl function
+   * Override inherited interpolateUrl.
    */
   public function interpolateUrl() {
     if ($parameters = $this->get_parameters()) {
@@ -33,7 +33,7 @@ class MediaSolidtangoStreamWrapper extends MediaReadOnlyStreamWrapper {
   }
 
   /**
-   * Get oEmbed thumbnail url
+   * Get oEmbed thumbnail url.
    *
    * @return
    *   If oEmbed information is available, a string with the thumbnail_url.
@@ -57,7 +57,7 @@ class MediaSolidtangoStreamWrapper extends MediaReadOnlyStreamWrapper {
   }
 
   /**
-   * Save thumbnail to disk
+   * Save thumbnail to disk.
    *
    * @return
    *   Path to local file.
