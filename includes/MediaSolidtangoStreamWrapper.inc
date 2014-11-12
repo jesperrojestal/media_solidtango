@@ -59,7 +59,7 @@ class MediaSolidtangoStreamWrapper extends MediaReadOnlyStreamWrapper {
   /**
    * Save thumbnail to disk.
    *
-   * @return
+   * @return string
    *   Path to local file.
    */
   public function getLocalThumbnailPath() {
