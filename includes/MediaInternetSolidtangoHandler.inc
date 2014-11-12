@@ -15,7 +15,7 @@ class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
    * Parse the embed url.
    *
    * @return string
-   * Complete solidtango url with host, type and slug.
+   *   Complete solidtango url with host, type and slug.
    */
   public function parse($embed_code) {
     // http://example.solidtango.com/video/x1y2z3a4
