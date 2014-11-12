@@ -11,7 +11,7 @@
  * @see hook_media_internet_providers().
  */
 class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
-  public function parse($embedCode) {
+  public function parse($embed_code) {
     // http://example.solidtango.com/video/x1y2z3a4
     $patterns = array(
       '@([a-z0-9\-]+\.solidtango\.com)/(video)/(.+)@i',
@@ -19,23 +19,23 @@ class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
     );
 
     foreach ($patterns as $pattern) {
-      preg_match($pattern, $embedCode, $matches);
+      preg_match($pattern, $embed_code, $matches);
       // @TODO: Parse is called often. Refactor so that valid ID is checked
-      // when a video is added, but not every time the embedCode is parsed.
+      // when a video is added, but not every time the embed_code is parsed.
       if (isset($matches[1]) && isset($matches[2]) && isset($matches[3]) && self::validId($matches[1], $matches[2], isset($matches[3]))) {
         return file_stream_wrapper_uri_normalize('solidtango://host/' . $matches[1] . '/type/' . $matches[2] . '/slug/' . $matches[3]);
       }
     }
   }
 
-  public function claim($embedCode) {
-    if ($this->parse($embedCode)) {
+  public function claim($embed_code) {
+    if ($this->parse($embed_code)) {
       return TRUE;
     }
   }
 
   public function getFileObject() {
-    $uri = $this->parse($this->embedCode);
+    $uri = $this->parse($this->embed_code);
     $file = file_uri_to_object($uri, TRUE);
 
     // Try to default the file name to the video's title.
@@ -57,7 +57,7 @@ class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
    *   Otherwise, NULL.
    */
   public function getOEmbed() {
-    $uri = $this->parse($this->embedCode);
+    $uri = $this->parse($this->embed_code);
     $external_url = file_create_url($uri);
     $oembed_url = url('http://solidtango.com/api/v1/oembed_video.json', array('query' => array('url' => $external_url)));
     $response = drupal_http_request($oembed_url);
@@ -74,7 +74,7 @@ class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
   /**
    * Check if a Solidtango video ID is valid.
    *
-   * @return boolean
+   * @return bool
    *   TRUE if the video ID is valid, or throws a
    *   MediaInternetValidationException otherwise.
    */

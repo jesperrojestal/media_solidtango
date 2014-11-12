@@ -16,17 +16,30 @@
 class MediaSolidtangoStreamWrapper extends MediaReadOnlyStreamWrapper {
   protected $base_url = 'http://';
 
-  static function getMimeType($uri, $mapping = NULL) {
+  /**
+   * Override inherited getMimeType function
+   */
+  public static function getMimeType($uri, $mapping = NULL) {
     return 'video/solidtango';
   }
 
-  function interpolateUrl() {
+  /**
+   * Override inherited interpolateUrl function
+   */
+  public function interpolateUrl() {
     if ($parameters = $this->get_parameters()) {
       return $this->base_url . $parameters['host'] . '/' . $parameters['type'] . '/' . $parameters['slug'];
     }
   }
 
-  function getOriginalThumbnailPath() {
+  /**
+   * Get oEmbed thumbnail url
+   *
+   * @return
+   *   If oEmbed information is available, a string with the thumbnail_url.
+   *   Otherwise, NULL.
+   */
+  public function getOriginalThumbnailPath() {
     $parts = $this->get_parameters();
     $uri = file_stream_wrapper_uri_normalize('solidtango://host/' . check_plain($parts['host']) . '/type/' . check_plain($parts['type']) . '/slug/' . check_plain($parts['slug']));
     $external_url = file_create_url($uri);
@@ -43,7 +56,13 @@ class MediaSolidtangoStreamWrapper extends MediaReadOnlyStreamWrapper {
     }
   }
 
-  function getLocalThumbnailPath() {
+  /**
+   * Save thumbnail to disk
+   *
+   * @return
+   *   Path to local file.
+   */
+  public function getLocalThumbnailPath() {
     $parts = $this->get_parameters();
     // There's no need to hide thumbnails, always use the public system rather
     // than file_default_scheme().
