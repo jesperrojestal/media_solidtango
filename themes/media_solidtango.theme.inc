@@ -1,8 +1,7 @@
 <?php
 
 /**
- * @file media_solidtango/themes/media_solidtango.theme.inc
- *
+ * @file
  * Theme and preprocess functions for Media: Solidtango.
  */
 
@@ -51,8 +50,8 @@ function media_solidtango_preprocess_media_solidtango_video(&$variables) {
 
   // Add template variables for accessibility.
   $variables['title'] = check_plain($file_object->filename);
-  // @TODO: Find an easy/ not too expensive way to get the Solidtango description
-  // to use for the alternative content.
+  // @todo: Find an easy and not too expensive way to get the Solidtango description
+  //   to use for the alternative content.
   $variables['alternative_content'] = t('Video of @title', array('@title' => $variables['title']));
 
   // Build the iframe URL with options query string.

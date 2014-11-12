@@ -2,8 +2,10 @@
 
 /**
  * @file
- * Provides a stream wrapper and formatters appropriate for accessing and
- * displaying Solidtango videos.
+ * Provides a stream wrapper and formatters for solidtango media.
+ *
+ * Wrapper and formatters appropriate for accessing and displaying
+ * Solidtango media.
  */
 
 // Load all Solidtango file formatters.
@@ -61,8 +63,8 @@ function media_solidtango_media_parse($embed_code) {
 }
 
  /**
- * Implements hook_file_mimetype_mapping_alter().
- */
+  * Implements hook_file_mimetype_mapping_alter().
+  */
 function media_solidtango_file_mimetype_mapping_alter(&$mapping) {
   $mapping['mimetypes'][] = 'video/solidtango';
 }

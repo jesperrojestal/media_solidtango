@@ -3,7 +3,8 @@
 /**
  * @file
  * File formatters for Solidtango videos.
- * TODO: cleanup of non-working stuff.
+ *
+ * @todo Cleanup of non-working stuff.
  */
 
 /**
@@ -62,7 +63,7 @@ function media_solidtango_file_formatter_video_view($file, $display, $langcode) 
     // Fake a default for attributes so the ternary doesn't choke.
     $display['settings']['attributes'] = array();
 
-    foreach (array('width', 'height', 'api' , 'autoplay', 'byline', 'color', 'loop', 'portrait', 'title', 'protocol', 'protocol_specify', 'attributes') as $setting) {
+    foreach (array('width', 'height', 'api', 'autoplay', 'byline', 'color', 'loop', 'portrait', 'title', 'protocol', 'protocol_specify', 'attributes') as $setting) {
       $element['#options'][$setting] = isset($file->override[$setting]) ? $file->override[$setting] : $display['settings'][$setting];
     }
 
@@ -167,7 +168,7 @@ function media_solidtango_validate_video_width_and_height($element, &$form_state
  */
 function media_solidtango_validate_video_color($element, &$form_state, $form) {
   // If the value is set, check if it's a hex color with or without '#'.
- if (!empty($element['#value']) && !preg_match('/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/', $element['#value'])) {
+  if (!empty($element['#value']) && !preg_match('/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/', $element['#value'])) {
     form_error($element, t("The color value is invalid. Please use a 3 or 6 character hex color code.", array('@dimension' => $element['#title'])));
   }
 }

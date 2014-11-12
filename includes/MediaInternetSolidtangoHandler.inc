@@ -11,11 +11,17 @@
  * @see hook_media_internet_providers().
  */
 class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
+  /**
+   * Parse the embed url.
+   *
+   * @return string
+   * Complete solidtango url with host, type and slug.
+   */
   public function parse($embed_code) {
     // http://example.solidtango.com/video/x1y2z3a4
     $patterns = array(
       '@([a-z0-9\-]+\.solidtango\.com)/(video)/(.+)@i',
-      '@([a-z0-9\-]+\.solidtango\.com)/(live)/(.+)@i'
+      '@([a-z0-9\-]+\.solidtango\.com)/(live)/(.+)@i',
     );
 
     foreach ($patterns as $pattern) {
@@ -28,12 +34,18 @@ class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
     }
   }
 
+  /**
+   * Override inherited claim.
+   */
   public function claim($embed_code) {
     if ($this->parse($embed_code)) {
       return TRUE;
     }
   }
 
+  /**
+   * Override inherited getFileObject.
+   */
   public function getFileObject() {
     $uri = $this->parse($this->embed_code);
     $file = file_uri_to_object($uri, TRUE);
