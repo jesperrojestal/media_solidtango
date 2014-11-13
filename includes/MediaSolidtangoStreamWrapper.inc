@@ -35,7 +35,7 @@ class MediaSolidtangoStreamWrapper extends MediaReadOnlyStreamWrapper {
   /**
    * Get oEmbed thumbnail url.
    *
-   * @return
+   * @return string|null
    *   If oEmbed information is available, a string with the thumbnail_url.
    *   Otherwise, NULL.
    */

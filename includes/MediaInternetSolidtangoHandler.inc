@@ -63,7 +63,7 @@ class MediaInternetSolidtangoHandler extends MediaInternetBaseHandler {
    *
    * See http://www.oembed.com.
    *
-   * @return
+   * @return array|null
    *   If oEmbed information is available, an array containing 'title', 'type',
    *   'url', and other information as specified by the oEmbed standard.
    *   Otherwise, NULL.
