@@ -81,7 +81,8 @@ function media_solidtango_file_formatter_video_view($file, $display, $langcode) 
     foreach ($settings_array as $setting) {
       if (isset($file->override[$setting])) {
         $element['#options'][$setting] = $file->override[$setting];
-      } else {
+      }
+     else {
         $element['#options'][$setting] = $display['settings'][$setting];
       }
     }
@@ -176,9 +177,11 @@ function media_solidtango_file_formatter_video_settings($form, &$form_state, $se
  * Validation for width and height.
  */
 function media_solidtango_validate_video_width_and_height($element, &$form_state, $form) {
-  // Check if the value is a number with an optional decimal or percentage sign, or "auto".
+  // Check if the value is a number with an optional decimal, % or "auto".
   if (!empty($element['#value']) && !preg_match('/^(auto|([0-9]*(\.[0-9]+)?%?))$/', $element['#value'])) {
-    form_error($element, t("The value entered for @dimension is invalid. Please insert a unitless integer for pixels, a percent, or \"auto\". Note that percent and auto may not function correctly depending on the browser and doctype.", array('@dimension' => $element['#title'])));
+
+    $error_msg = t('The value entered for @dimension is invalid. Please insert a unitless integer for pixels, a percent, or "auto". Note that percent and auto may not function correctly depending on the browser and doctype.', array('@dimension' => $element['#title']));
+    form_error($element, $error_msg);
   }
 }
 
