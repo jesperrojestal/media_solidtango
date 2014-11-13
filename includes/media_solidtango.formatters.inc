@@ -63,8 +63,27 @@ function media_solidtango_file_formatter_video_view($file, $display, $langcode) 
     // Fake a default for attributes so the ternary doesn't choke.
     $display['settings']['attributes'] = array();
 
-    foreach (array('width', 'height', 'api', 'autoplay', 'byline', 'color', 'loop', 'portrait', 'title', 'protocol', 'protocol_specify', 'attributes') as $setting) {
-      $element['#options'][$setting] = isset($file->override[$setting]) ? $file->override[$setting] : $display['settings'][$setting];
+    $settings_array = array(
+      'width',
+      'height',
+      'api',
+      'autoplay',
+      'byline',
+      'color',
+      'loop',
+      'portrait',
+      'title',
+      'protocol',
+      'protocol_specify',
+      'attributes',
+    );
+
+    foreach ($settings_array as $setting) {
+      if (isset($file->override[$setting])) {
+        $element['#options'][$setting] = $file->override[$setting];
+      } else {
+        $element['#options'][$setting] = $display['settings'][$setting];
+      }
     }
 
     return $element;
