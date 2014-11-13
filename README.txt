@@ -41,9 +41,10 @@ Media: Solidtango can be installed via the standard Drupal installation process
 USAGE
 -----
 
-Media: Solidtango integrates the Solidtango video-platform with the Media module to
-allow users to add and manage Solidtango videos and live streams as they would any other piece of
-media.
+Media: Solidtango integrates the Solidtango video-platform with the Media module
+to allow users to add and manage Solidtango videos and live streams as they
+would any other piece of media.
 
 Internet media can be added on the Web tab of the Add file page (file/add/web).
-With Media: Solidtango enabled, users can add a Solidtango video/livestream by entering its URL.
+With Media: Solidtango enabled, users can add a Solidtango video/livestream
+by entering its URL.
