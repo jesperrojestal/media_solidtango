@@ -82,7 +82,7 @@ function media_solidtango_file_formatter_video_view($file, $display, $langcode) 
       if (isset($file->override[$setting])) {
         $element['#options'][$setting] = $file->override[$setting];
       }
-     else {
+      else {
         $element['#options'][$setting] = $display['settings'][$setting];
       }
     }
