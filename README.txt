@@ -10,9 +10,11 @@ CONTENTS OF THIS FILE
 INTRODUCTION
 ------------
 
-Adapted from media_vimeo module all kudos to them.
+Adapted from media_vimeo module kudos to them.
 
 Media: Solidtango adds Solidtango as a supported media provider.
+
+Tested with D7 and Media 7.x-1.x.
 
 Current Maintainers:
 
@@ -22,7 +24,6 @@ TODO
 ----
 
 Unused code and incorrect comments cleanup, also options, theme and others.
-Installation, it's a hacky mess right now. 
 
 REQUIREMENTS
 ------------

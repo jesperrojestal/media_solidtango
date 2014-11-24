@@ -191,7 +191,7 @@ function media_solidtango_validate_video_width_and_height($element, &$form_state
 function media_solidtango_validate_video_color($element, &$form_state, $form) {
   // If the value is set, check if it's a hex color with or without '#'.
   if (!empty($element['#value']) && !preg_match('/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/', $element['#value'])) {
-    form_error($element, t("The color value is invalid. Please use a 3 or 6 character hex color code.", array('@dimension' => $element['#title'])));
+    form_error($element, t("The color value is invalid. Please use a 3 or 6 character hex color code."));
   }
 }
 
