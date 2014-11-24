@@ -62,9 +62,9 @@ function media_solidtango_media_parse($embed_code) {
   return $handler->parse($embed_code);
 }
 
- /**
-  * Implements hook_file_mimetype_mapping_alter().
-  */
+/**
+ * Implements hook_file_mimetype_mapping_alter().
+ */
 function media_solidtango_file_mimetype_mapping_alter(&$mapping) {
   $mapping['mimetypes'][] = 'video/solidtango';
 }
