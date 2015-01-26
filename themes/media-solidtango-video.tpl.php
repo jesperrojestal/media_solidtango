@@ -19,6 +19,6 @@
  */
 
 ?>
-<div class="<?php print $classes; ?> media-solidtango-<?php print $id; ?>">
-  <iframe class="media-solidtango-player" width="<?php print $width; ?>" height="<?php print $height; ?>" title="<?php print $title; ?>" src="<?php print $url; ?>" frameborder="0" allowfullscreen><?php print $alternative_content; ?></iframe>
+<div class="<?php print $classes; ?> media-solidtango-<?php print $video_id; ?>">
+  <iframe class="media-solidtango-player" width="<?php print $width; ?>" height="<?php print $height; ?>" title="<?php print $title; ?>" src="<?php print $url; ?>" frameborder="0" id="media-solidtango-<?php print $video_id; ?>" allowfullscreen><?php print $alternative_content; ?></iframe>
 </div>

@@ -76,8 +76,9 @@ function media_solidtango_file_formatter_video_view($file, $display, $langcode) 
       'protocol',
       'protocol_specify',
       'attributes',
+      'enablejsapi',
+      'origin',
     );
-
     foreach ($settings_array as $setting) {
       if (isset($file->override[$setting])) {
         $element['#options'][$setting] = $file->override[$setting];
@@ -169,7 +170,26 @@ function media_solidtango_file_formatter_video_settings($form, &$form_state, $se
     '#type' => 'checkbox',
     '#default_value' => $settings['portrait'],
   );
-
+  
+  // JS api.
+  $element['enablejsapi'] = array(
+    '#title' => t('Enable the Embed API'),
+    '#type' => 'checkbox',
+    '#default_value' => $settings['enablejsapi'],
+    '#description' => 'An id in the format <code>media-solidtango-{video_id}</code> will be added to each iframe.',
+  );
+  $element['origin'] = array(
+    '#title' => t('Origin'),
+    '#type' => 'textfield',
+    '#description' => t('If the Javascript API is enabled, enter your site\'s domain for added security. Please insert a valid domain in the format https://yoursubdomain.solidtango.com.'),
+    '#default_value' => $settings['origin'],
+    '#states' => array(
+      'invisible' => array(
+        ':input[name="displays[media_solidtango_video][settings][enablejsapi]"]' => array('checked' => FALSE),
+      ),
+    ),
+    '#element_validate' => array('_solidtango_validate_jsapi_domain'),
+  );
   return $element;
 }
 
@@ -241,4 +261,15 @@ function media_solidtango_file_formatter_image_settings($form, &$form_state, $se
   );
 
   return $element;
+}
+
+/**
+ * Validation for Js API Origin.
+ */
+function _solidtango_validate_jsapi_domain ($element, &$form_state, $form) {
+
+  // Check if the value is a url with http/s and no trailing directories.
+  if (!empty($element['#value']) && !preg_match('/^https?\:\/\/[a-zA-Z0-9\-\.]+\.([a-zA-Z]{2,4}){1,2}$/', $element['#value'])) {
+    form_error($element, t('Please insert a valid domain in the format https://yoursubdomain.solidtango.com'));
+  }
 }

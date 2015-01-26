@@ -30,7 +30,98 @@ function media_solidtango_preprocess_media_solidtango_video(&$variables) {
   else {
     $protocol = '//';
   }
+  
+  if ($variables['options']['enablejsapi']) {
+    $query['api'] = 'true';
+    $id = drupal_html_id('media-solidtango-' . $variables['video_id']);
+    //THIS NEEDS WORK
+    // setting var to_origin and iframe_id in $(document).ready( function is not working
+    
+    $js = '
+    
+    	// Send/recieve messages from/to
+	   var to_origin = "'. $variables['options']['origin'] . '"
 
+	   // iframe ids
+	   var iframe1 = "' . $id . '";
+	
+  /* Variables */
+
+	// Player ready for commands
+	var ready = false;
+
+	// Player playing
+	var playing = false;
+
+	// Current position in seconds
+	var position = 0;
+
+	// Check if player is ready for actions
+	var status_timer;
+
+	// Runtime timer
+	var runtime;
+
+	// Status update interval
+	var status_update_interval = 1000;
+
+	// UI update interval
+	var ui_update_interval = 1000;
+  
+  // Recieve message from iframe
+function receiveMessage(event){
+  var data = JSON.parse(event.data);
+
+  switch(data.func){
+    case "ready":
+      ready = data.args;
+    case "position":
+      position = data.args;
+    break;
+    case "playing":
+      playing = data.args;
+    break;
+    default:
+      console.log(event);
+    break;
+  }
+}
+
+// Send message to iframe
+function sendMessage(iframe_id, func, args){
+  
+  var message = {
+    "event" : "message",
+    "func"  : func
+  };
+  if(args){ message[\'args\'] = args }
+  var message = JSON.stringify(message);
+
+  document.getElementById(iframe_id).contentWindow.postMessage(
+    message, to_origin
+  );
+}
+
+// this should be the only js added inline so why can dynamically set the to_origin and iframe1
+  (function ($) {
+    $(document).ready(function(){
+			// Send/recieve messages from/to
+			var to_origin = "'. $variables['options']['origin'] . '"
+
+			// iframe ids
+			var iframe1 = "' . $id . '";
+
+			// Recieve message event listener
+			window.addEventListener(
+				"message", 
+				receiveMessage,
+				false
+			);
+    });
+  }(jQuery));';
+
+  drupal_add_js($js, 'inline');
+  }
   // Add some options as their own template variables.
   foreach (array('width', 'height') as $themevar) {
     $variables[$themevar] = $variables['options'][$themevar];
@@ -47,7 +138,7 @@ function media_solidtango_preprocess_media_solidtango_video(&$variables) {
       $variables['classes_array'][] = $variables['options']['attributes']['class'];
     }
   }
-
+  
   // Add template variables for accessibility.
   $variables['title'] = check_plain($file_object->filename);
   // @todo Find an easy and not too expensive way to get the Solidtango description
